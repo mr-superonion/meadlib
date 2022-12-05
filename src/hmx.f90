@@ -2470,7 +2470,7 @@ CONTAINS
       hmod%nu = hmod%dc/hmod%sig
 
       IF (verbose) WRITE (*, *) 'INIT_HALOMOD: M, R, rv, sigma, nu tables filled'
-      IF (hmod%nu(1) > 1.) .AND. (verbose) THEN
+      IF ((hmod%nu(1) > 1.) .AND. (verbose)) THEN
          WRITE(*, *) 'INIT_HALOMOD: WARNING: Lowest nu value stored is greater than unity'
          WRITE(*, *) 'INIT_HALOMOD: WARNING: z:', real(hmod%z)
          WRITE(*, *) 'INIT_HALOMOD: WARNING: ihm:', hmod%ihm
@@ -2617,7 +2617,7 @@ CONTAINS
 
          ! Mass function
          IF (is_in_array(hmod%imf, [imf_ST, imf_ST2002, imf_SMT, imf_Despali, imf_Courtin]) .AND. &
-            is_in_array(hmod%iDv, [iDv_200, iDv_200c, iDv_178])) .AND. (verbose) THEN
+            is_in_array(hmod%iDv, [iDv_200, iDv_200c, iDv_178]) .AND. (verbose)) THEN
             WRITE(*, *) 'INIT_HALOMOD: WARNING: Using a virial halo mass function with a fixed halo definition'
             WRITE(*, *) 'INIT_HALOMOD: WARNING: ihm:', hmod%ihm
          END IF
@@ -2625,18 +2625,18 @@ CONTAINS
          ! Concentration
          IF (is_in_array(hmod%iconc, [iconc_Bullock_full, iconc_Bullock_simple, iconc_Duffy_full_vir, iconc_Duffy_relaxed_vir, &
             iconc_ENS, iconc_Maccio, iconc_Seljak]) .AND. &
-            is_in_array(hmod%iDv, [iDv_200, iDv_200c, iDv_178])) .AND. (verbose) THEN
+            is_in_array(hmod%iDv, [iDv_200, iDv_200c, iDv_178]) .AND. (verbose)) THEN
             WRITE(*, *) 'INIT_HALOMOD: WARNING: Using a virial c(M) relation with a fixed halo definition'
             WRITE(*, *) 'INIT_HALOMOD: WARNING: ihm:', hmod%ihm
          END IF
          IF (is_in_array(hmod%iconc, [iconc_Duffy_full_200, iconc_Duffy_relaxed_200]) .AND. &
-            .NOT. is_in_array(hmod%iDv, [iDv_200])) .AND. (verbose) THEN
+            .NOT. is_in_array(hmod%iDv, [iDv_200]) .AND. (verbose)) THEN
             WRITE(*, *) 'INIT_HALOMOD: WARNING: Using a M200 c(M) relation without a M200 halo definition'
             WRITE(*, *) 'INIT_HALOMOD: WARNING: ihm:', hmod%ihm
          END IF
          IF (is_in_array(hmod%iconc, [iconc_Duffy_full_200c, iconc_Duffy_relaxed_200c, iconc_Child, iconc_Diemer, &
             iconc_Neto_full, iconc_Neto_relaxed, iconc_NFW, iconc_Prada, iconc_Klypin, iconc_Okoli]) .AND. &
-            .NOT. is_in_array(hmod%iDv, [iDv_200c])) .AND. (verbose) THEN
+            .NOT. is_in_array(hmod%iDv, [iDv_200c]) .AND. (verbose)) THEN
             WRITE(*, *) 'INIT_HALOMOD: WARNING: Using a M200c c(M) relation without a M200c halo definition'
             WRITE(*, *) 'INIT_HALOMOD: WARNING: ihm:', hmod%ihm
          END IF
